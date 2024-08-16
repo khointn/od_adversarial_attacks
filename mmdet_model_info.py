@@ -144,7 +144,7 @@ extra_model_info = {
     },
     'DINOT': {
         'config_file': "./mmdet_configs/mm_grounding_dino/grounding_dino_swin-t_finetune_16xb2_1x_coco.py",
-        'checkpoint_file': "/mmdetection/checkpoints/grounding_dino_swin-t_finetune_16xb2_1x_coco_20230921_152544-5f234b20.pth"
+        'checkpoint_file': "./mmdetection/checkpoints/grounding_dino_swin-t_finetune_16xb2_1x_coco_20230921_152544-5f234b20.pth"
     }
 }
 

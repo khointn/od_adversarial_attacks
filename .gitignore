@@ -161,6 +161,6 @@ cython_debug/
 #/data/
 mmdetection/
 data/*
-mmdet_configs/*
+#mmdet_configs/*
 results/*
 ~/
