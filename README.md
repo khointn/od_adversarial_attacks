@@ -40,6 +40,7 @@ python attacks/ebad.py --n_wb <surrogates_num> --victim <victim_name> --iters <i
 ```bash
 python attacks/ebad.py --surrogates FasterR-CNN YOLOv3 --victim RetinaNet --iters 10 --iterw 10
 ```
+* Note: If you encounter the deepcopy bug, you can go to the two_stage code and change the line from ```copy.deepcopy(batch_data_samples)``` to ```batch_data_samples.copy()```.
 
 ### 3. Evaluation
 
