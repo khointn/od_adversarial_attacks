@@ -15,7 +15,6 @@ from mmdet.apis import DetInferencer as inference_detector
 
 from mmdet_model_info import model_info, extra_model_info
 model_info.update(extra_model_info)
-print(model_info['GLIP'])
 
 def get_bb_loss(detections, target_clean, LOSS):
     """define the blackbox attack loss
@@ -445,10 +444,10 @@ def get_loss_from_dict(model_name, loss_dict):
     Returns:
         losses (~ torch.Tensor): the summation of the loss
     """
-    if model_name in ['Faster R-CNN', 'Libra R-CNN', 'GN+WS', 'FasterRN101']:
+    if model_name in ['FasterR-CNN', 'LibraR-CNN', 'GN+WS', 'FasterRN101']:
         losses = loss_dict['loss_cls'] + loss_dict['loss_bbox'] + sum(loss_dict['loss_rpn_cls']) + sum(loss_dict['loss_rpn_bbox'])
         # losses = sum(loss_dict.values())
-    elif model_name in ['Grid R-CNN']:
+    elif model_name in ['GridR-CNN']:
         losses = loss_dict['loss_cls'] + sum(loss_dict['loss_rpn_cls']) + sum(loss_dict['loss_rpn_bbox'])
     elif model_name in ['YOLOv3', 'RetinaNet', 'RepPoints', 'SSD', 'YOLOv3MN', 'RetinaNetRN101', 'RetinaNetX101']:
         losses = sum(sum(loss_dict[key]) for key in loss_dict)

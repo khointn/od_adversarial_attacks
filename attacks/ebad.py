@@ -33,8 +33,7 @@ def parse_arg():
     parser.add_argument("--root", type=str, default='result', help="the folder name of result")
     parser.add_argument("--victim", type=str, default='RetinaNet', help="victim model") #RetinaNet
     parser.add_argument("--x", type=int, default=3, help="times alpha by x")
-    parser.add_argument("--n_wb", type=int, default=2, help="number of models in the ensemble")
-    parser.add_argument("--surrogate", type=str, default='Faster R-CNN', help="surrogate model when n_wb=1")
+    parser.add_argument('--surrogates', '--names-list', nargs='+', default=['Faster R-CNN', 'YOLOv3'])
     parser.add_argument("--lr", type=float, default=1e-2, help="learning rate of w")
     parser.add_argument("--iterw", type=int, default=5, help="iterations of updating w")
     parser.add_argument("--dataset", type=str, default='coco', help="model dataset 'voc' or 'coco'. This will change the output range of detectors.")
@@ -50,24 +49,25 @@ def pre_setup():
     eps = args.eps
     n_iters = args.iters
     x_alpha = args.x
-    alpha = eps / n_iters * x_alpha
     iterw = args.iterw
-    n_wb = args.n_wb
+    surrogates = args.surrogates
+    n_wb = len(surrogates)
     lr_w = args.lr
     dataset = args.dataset
     victim_name = args.victim
     single = args.single
     no_balancing = args.no_balancing
-    surrogate = (args.surrogate if n_wb==1 else None)
 
     # name experiment
-    exp_name = f'{dataset}_wb_{n_wb}_linf_{eps}_iters{n_iters}_alphax{x_alpha}_victim_{victim_name}_lr{lr_w}_iterw{iterw}'
-    if surrogate != None:
-        exp_name += f'_{surrogate}'
+    exp_name = f'{dataset}_victim_{victim_name}_nwb{n_wb}_iters{n_iters}_iterw{iterw}_linf{eps}_alphax{x_alpha}_lr{lr_w}'
+
     if single:
         exp_name += '_single'
     if no_balancing:
         exp_name += '_nobalancing'
+    for i in surrogates:
+        exp_name += f'_{i}'
+    exp_name = ''.join(exp_name.split(' ')) #Remove redundant spacing
     print(f"\nExperiment: {exp_name} \n")
     
     # create folders for saving adversarial results
@@ -143,7 +143,7 @@ def pre_setup():
         "dataset_name": dataset,
         "dataset_labels": dataset_labels,
         "dataset_num_labels": dataset_num_labels,
-        "surrogate": surrogate,
+        "surrogate": surrogates,
     }
 
     return test_image_ids, exp_name, dirs, adv_params, logger
@@ -153,21 +153,21 @@ def main():
 
     # load surrogate models
     ensemble = []
-    models_all = ['YOLOv3', 'Faster R-CNN', 'RetinaNet', 'FCOS', 'SSD', 'Grid R-CNN']
-    model_list = models_all[:adv_params['n_wb']]
-    if adv_params['n_wb'] == 1:
-        model_list = [adv_params['surrogate']]
+    #models_all = ['YOLOv3', 'Faster R-CNN', 'RetinaNet', 'FCOS', 'SSD', 'Grid R-CNN']
+    #model_list = models_all[:adv_params['n_wb']]
+    print(adv_params['surrogate'])
+    model_list = adv_params['surrogate']
     for model_name in model_list:
         ensemble.append(model_train(model_name=model_name, dataset=adv_params['dataset_name']))
 
     # load victim model
     # ['RetinaNet', 'Libra', 'FoveaBox', 'FreeAnchor', 'DETR', 'Deformable']
-    if adv_params['victim_name'] == 'Libra':
-        adv_params['victim_name'] = 'Libra R-CNN'
-    elif adv_params['victim_name'] == 'Deformable':
-        adv_params['victim_name'] = 'Deformable DETR'
-    elif adv_params['victim_name'] == 'Faster':
-        adv_params['victim_name'] = 'Faster R-CNN'
+    # if adv_params['victim_name'] == 'Libra':
+    #     adv_params['victim_name'] = 'Libra R-CNN'
+    # elif adv_params['victim_name'] == 'Deformable':
+    #     adv_params['victim_name'] = 'Deformable DETR'
+    # elif adv_params['victim_name'] == 'Faster':
+    #     adv_params['victim_name'] = 'Faster R-CNN'
 
     model_victim = model_train(model_name=adv_params['victim_name'], dataset=adv_params['dataset_name'])
     all_model_names = model_list + [adv_params['victim_name']]

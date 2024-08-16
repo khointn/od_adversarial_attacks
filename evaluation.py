@@ -4,6 +4,7 @@ import os
 import os.path as osp
 import warnings
 from copy import deepcopy
+from pathlib import Path
 
 from mmengine import ConfigDict
 from mmengine.config import Config, DictAction
@@ -66,6 +67,15 @@ def parse_args():
     if 'LOCAL_RANK' not in os.environ:
         os.environ['LOCAL_RANK'] = str(args.local_rank)
     return args
+
+def reorganize_path(data_root):
+    if data_root != 'data/coco/':
+        save_dirs = ['advs_fail', 'advs_success', 'advs_notdet']
+        val2017 = Path(data_root) / 'val2017'
+        val2017.mkdir(parents=True, exist_ok=True)
+        for name in os.listdir(data_root):
+            if os.path.isdir(name) and name in save_dirs:
+                os.symlink(Path(data_root) / name / '*', val2017 /)
 
 
 def main(args, config=None, checkpoint=None):

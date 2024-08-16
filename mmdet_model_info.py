@@ -4,7 +4,7 @@
 import argparse
 
 model_info = {
-    'Faster R-CNN': {
+    'FasterR-CNN': {
         'config_file': './mmdet_configs/faster_rcnn/faster-rcnn_r50_fpn_1x_coco.py',
         'checkpoint_file': './mmdetection/checkpoints/faster_rcnn_r50_fpn_1x_coco_20200130-047c8118.pth',
         'download_link': 'http://download.openmmlab.com/mmdetection/v2.0/faster_rcnn/faster_rcnn_r50_fpn_1x_coco/faster_rcnn_r50_fpn_1x_coco_20200130-047c8118.pth'
@@ -20,7 +20,7 @@ model_info = {
         'checkpoint_file': './mmdetection/checkpoints/yolov3_d53_mstrain-416_273e_coco-2b60fcd9.pth',
         'download_link': 'http://download.openmmlab.com/mmdetection/v2.0/yolo/yolov3_d53_mstrain-416_273e_coco/yolov3_d53_mstrain-416_273e_coco-2b60fcd9.pth'
     },
-    'Libra R-CNN': {
+    'LibraR-CNN': {
         'config_file': './mmdet_configs/libra_rcnn/libra-faster-rcnn_r50_fpn_1x_coco.py',
         'checkpoint_file': './mmdetection/checkpoints/libra_faster_rcnn_r50_fpn_1x_coco_20200130-3afee3a9.pth',
         'download_link': 'http://download.openmmlab.com/mmdetection/v2.0/libra_rcnn/libra_faster_rcnn_r50_fpn_1x_coco/libra_faster_rcnn_r50_fpn_1x_coco_20200130-3afee3a9.pth'
@@ -30,7 +30,7 @@ model_info = {
         'checkpoint_file': './mmdetection/checkpoints/fcos_center-normbbox-centeronreg-giou_r50_caffe_fpn_gn-head_dcn_1x_coco-ae4d8b3d.pth',
         'download_link': 'https://download.openmmlab.com/mmdetection/v2.0/fcos/fcos_center-normbbox-centeronreg-giou_r50_caffe_fpn_gn-head_dcn_1x_coco/fcos_center-normbbox-centeronreg-giou_r50_caffe_fpn_gn-head_dcn_1x_coco-ae4d8b3d.pth'
     },
-    'Deformable DETR': {
+    'DeformableDETR': {
         'config_file': './mmdet_configs/deformable_detr/deformable-detr_r50_16xb2-50e_coco.py',
         'checkpoint_file': './mmdetection/checkpoints/deformable-detr_r50_16xb2-50e_coco_20221029_210934-6bc7d21b.pth',
         'download_link': 'https://download.openmmlab.com/mmdetection/v2.0/deformable_detr/deformable_detr_r50_16x2_50e_coco/deformable_detr_r50_16x2_50e_coco_20210419_220030-a12b9512.pth'
