@@ -13,6 +13,7 @@ In the root folder ```od_adversarial_attacks```, run:
 ```bash
 conda env create -f environment.yml
 conda activate od_attacks
+pip install pre-commit
 mim install mmdet==3.3.0
 python mmdet_model_info.py
 ```
