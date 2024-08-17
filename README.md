@@ -42,7 +42,7 @@ python attacks/ebad.py --surrogates FasterR-CNN YOLOv3 --victim RetinaNet --iter
 ```
 * Note: If you encounter the deepcopy bug, you can go to the two_stage code and change the line from ```copy.deepcopy(batch_data_samples)``` to ```batch_data_samples.copy()```.
 
-Important parser params:
+Important parser arguments:
 
 ```--surrogates```: Names of the surrogate detectors seperate by space.
 
