@@ -42,6 +42,21 @@ python attacks/ebad.py --surrogates FasterR-CNN YOLOv3 --victim RetinaNet --iter
 ```
 * Note: If you encounter the deepcopy bug, you can go to the two_stage code and change the line from ```copy.deepcopy(batch_data_samples)``` to ```batch_data_samples.copy()```.
 
+Important parser params:
+
+```--surrogates```: Names of the surrogate detectors seperate by space.
+
+```--victim```: Name of the victim detector.
+
+```--iters```: Iner iterations update the perturbation with surrogate output and losses (default 10).
+
+```--iterw```: Outer iterations update the perturbation with victim output (default 5).
+
+```--eps```: $L_\infty$ constraint over 255 (default 10).
+
+```--dataset```: The dataset of the images, COCO or VOC (default coco)
+
+
 ### 3. Evaluation
 
 (Updating)
