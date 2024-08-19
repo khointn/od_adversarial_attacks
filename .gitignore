@@ -163,3 +163,4 @@ mmdetection/
 data/*
 results/*
 ~/
+work_dirs/
