@@ -56,7 +56,21 @@ Important parser arguments:
 
 ```--dataset```: The dataset of the images, COCO or VOC (default coco)
 
+The perturbed images will be saved in the ```results`` directory.
 
 ### 3. Evaluation
 
-(Updating)
+After running attack, you can evaluate the mAP of the perturbed images.
+
+In the root folder ```od_adversarial_attacks```, run:
+```bash
+bash bash_scripts/evaluation.sh -v <victim name> -s <perturbed images>
+```
+* Example:
+```bash
+bash bash_scripts/evaluation.sh -v YOLOv3 -s ~/od_adversarial_attacks/results/ebad/coco_victim_YOLOv3_nwb1_iters1_iterw1_linf10_alphax3_lr0.01_YOLOv3
+```
+
+The terminal should run something like:
+
+![](./assets/demo_eval.png)
