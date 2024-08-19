@@ -6,6 +6,11 @@ Current attacks (to be updated):
 * [Ensemble-based Blackbox Attacks on Dense Prediction](https://github.com/CSIPlab/EBAD) (EBAD)
 * [Context-Aware Adversarial Attacks](https://github.com/CSIPlab/context-aware-attacks) (CAT)
 
+Package versions:
+* Python 3.10.12
+* MMDet 3.3.0, MMCV 2.1.0, MMEngine 0.10.3
+* Torch 2.1.0
+
 ## Run EBAD
 
 ### 1. Setup
