@@ -33,7 +33,7 @@ python mmdet_model_info.py --extra
 
 In the root folder ```od_adversarial_attacks```, run:
 ```bash
-python attacks/ebad.py --n_wb <surrogates_num> --victim <victim_name> --iters <iters_num> --iterw <iterw_num> ...
+python attacks/ebad.py --n_wb <surrogates> --victim <victim> --iters <iters> --iterw <iterw> ...
 ```
 
 * Default example: 
@@ -56,7 +56,30 @@ Important parser arguments:
 
 ```--dataset```: The dataset of the images, COCO or VOC (default coco)
 
+The perturbed images will be saved in the ```results`` directory.
 
-### 3. Evaluation
+## Evaluation
 
-(Updating)
+### 1. Single victim
+
+After running attack, you can evaluate the mAP of the perturbed images.
+
+In the root folder ```od_adversarial_attacks```, run:
+```bash
+bash bash_scripts/evaluation.sh -v <victim name> -s <perturbed images>
+```
+
+```-v/--victim```: name of the victim detector in the ```mmdet_model_info```
+
+```-s/--searchpath```: path to the result directory.
+
+* Example:
+```bash
+bash bash_scripts/evaluation.sh -v YOLOv3 -s ~/od_adversarial_attacks/results/ebad/coco_victim_YOLOv3_nwb1_iters1_iterw1_linf10_alphax3_lr0.01_YOLOv3
+```
+
+The terminal should run something like:
+
+![](./assets/demo_eval.png)
+
+### 2. All victims and log (updating)
